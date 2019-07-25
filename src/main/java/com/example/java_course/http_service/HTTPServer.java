@@ -1,12 +1,8 @@
+package com.example.java_course.http_service;
+
 import java.io.* ;
 import java.net.* ;
 import java.util.*;
-
-interface Servlet{
-	void init();
-	void service( String params, byte [] requestBuffer, OutputStream output);
-}
-
 
 public class HTTPServer {
 	private static Map<String, Servlet> servletCache=new HashMap<>();
@@ -23,14 +19,14 @@ public class HTTPServer {
 
 		try {
 			serverSocket = new ServerSocket(port);
-			System.out.println("http server is listenning £º" + port);
+			System.out.println("http server is listenning ï¿½ï¿½" + port);
 
 			//service loop
 			while (true) { 
 				try {
 					//wait for client
 					final Socket socket = serverSocket.accept();
-					System.out.println("client from£º" 
+					System.out.println("client fromï¿½ï¿½" 
 						+ socket.getInetAddress() + ":" + socket.getPort());
 
 					service(socket); //reponse service
