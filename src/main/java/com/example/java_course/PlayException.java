@@ -38,13 +38,14 @@ class ApiException extends Exception {
     super(msg, e);
   }
 }
+
 class Api {
   public void api() throws ApiException {
     try {
       B b = new B();
       b.b();
     } catch (BException bx) {
-      System.out.println("something wrong: " + bx);
+      throw new ApiException("api() wrong:", bx);
     }
   }
 }
@@ -52,10 +53,12 @@ class Api {
 public class PlayException {
   public static void main(String args[]) {
     try {
-      B b = new B();
-      b.b();
-    } catch (BException be) {
-      System.out.println("===>" + be.toString());
+      Api api = new Api();
+      api.api();
+    } catch (ApiException ae) {
+      System.out.println("something wrong: " + ae);
+      System.out.println("caused by: ");
+      ae.printStackTrace();
     }
   }
 }
